@@ -5,7 +5,7 @@ import guru.springframework.spring5webapp.model.Book;
 import guru.springframework.spring5webapp.model.Publisher;
 import guru.springframework.spring5webapp.repositories.AuthorRepository;
 import guru.springframework.spring5webapp.repositories.BookRepository;
-import guru.springframework.spring5webapp.repositories.PublisherReposirory;
+import guru.springframework.spring5webapp.repositories.PublisherRepository;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -18,12 +18,12 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 
     private AuthorRepository authorRepository;
     private BookRepository bookRepository;
-    private PublisherReposirory publisherReposirory;
+    private PublisherRepository publisherRepository;
 
-    public DevBootstrap(AuthorRepository authorRepository, BookRepository bookRepository, PublisherReposirory publisherReposirory) {
+    public DevBootstrap(AuthorRepository authorRepository, BookRepository bookRepository, PublisherRepository publisherRepository) {
         this.authorRepository = authorRepository;
         this.bookRepository = bookRepository;
-        this.publisherReposirory = publisherReposirory;
+        this.publisherRepository = publisherRepository;
     }
 
     @Override
@@ -35,8 +35,8 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 
         Publisher publisher = new Publisher();
         publisher.setName("foo");
-
-        publisherReposirory.save(publisher);
+        publisher.setAddress("12th Street, LA");
+        publisherRepository.save(publisher);
 
         //Eric
         Author eric = new Author("Eric", "Evans");
@@ -46,6 +46,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 
         authorRepository.save(eric);
         bookRepository.save(ddd);
+
 
         //Rod
         Author rod = new Author("Rod", "Johnson");
